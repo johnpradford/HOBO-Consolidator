@@ -2,3 +2,5 @@
 
 test:
 	pytest
+test:
+	PYTHONPATH=src pytest

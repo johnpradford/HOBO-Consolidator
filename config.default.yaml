@@ -12,4 +12,16 @@ null_tokens: ["", "NA", "N/A", "null"]
 output_timestamp_format: "%Y-%m-%dT%H:%M:%S%z"
 site_normalization: {}
 provenance_enabled: true
+site_regex: '(?P<site>[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*)'
+timestamp_candidates: ['Date Time', 'Timestamp', 'Time']
+timestamp_formats: ['%Y-%m-%d %H:%M:%S', '%m/%d/%Y %H:%M:%S', '%Y-%m-%dT%H:%M:%S']
+timezone_mode: assume_utc
+timezone_name: UTC
+conflict_policy: prefer_newest_file
+source_priority: []
+null_tokens: ['', 'NA', 'N/A', 'null', 'None']
+output_timestamp_format: '%Y-%m-%dT%H:%M:%S%z'
+site_normalization_map:
+  cavea: Cave_A
+provenance_columns: true
 rounding_seconds: 1
