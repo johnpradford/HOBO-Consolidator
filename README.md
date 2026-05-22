@@ -41,7 +41,7 @@ Examples (PowerShell):
 .\hobo-consolidator.bat .\file1.csv .\folder2
 ```
 
-The launcher prefers `.venv\Scripts\python.exe` in this repo; if not found, it falls back to `py -3`.
+The launcher prefers `.venv\Scripts\python.exe` in this repo; if not found, it falls back to `py -3`. It also injects `src` into `PYTHONPATH` and pauses with an error message if execution fails.
 
 ## Features
 - Supports `.csv`, `.txt`, `.xlsx`, `.xls`.
