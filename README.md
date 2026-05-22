@@ -29,6 +29,20 @@ hobo-consolidator ./exports_folder --config config.default.yaml --output-dir ./o
 python -m hobo_consolidator.cli ./file1.csv ./folder2
 ```
 
+
+### Windows `.bat` launcher
+
+A ready-to-use launcher is included at repo root: `hobo-consolidator.bat`.
+
+Examples (PowerShell):
+
+```powershell
+.\hobo-consolidator.bat .\exports --config .\config.default.yaml --output-dir .\out
+.\hobo-consolidator.bat .\file1.csv .\folder2
+```
+
+The launcher prefers `.venv\Scripts\python.exe` in this repo; if not found, it falls back to `py -3`.
+
 ## Features
 - Supports `.csv`, `.txt`, `.xlsx`, `.xls`.
 - Recursive file discovery; ignores hidden/system/temp files (`~$`, `.DS_Store`, `Thumbs.db`).
