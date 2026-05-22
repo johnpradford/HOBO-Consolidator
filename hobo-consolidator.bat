@@ -1,37 +1,62 @@
+@'
 @echo off
-setlocal
+setlocal EnableExtensions
 
 set "SCRIPT_DIR=%~dp0"
+cd /d "%SCRIPT_DIR%"
 set "PYTHONPATH=%SCRIPT_DIR%src;%PYTHONPATH%"
+set "LOG=%SCRIPT_DIR%hobo-launcher.log"
 
-if "%~1"=="" (
-  echo HOBO Consolidator launcher
-  echo.
-  echo No input path was provided, defaulting to current folder (.).
-  echo Tip: drag and drop files/folders onto this .bat for targeted processing.
-  echo.
-  set "DEFAULT_INPUT=."
-)
+echo [%date% %time%] Launcher start > "%LOG%"
+echo WorkingDir=%CD% >> "%LOG%"
+echo Args=%* >> "%LOG%"
 
 if exist "%SCRIPT_DIR%.venv\Scripts\python.exe" (
   set "PYEXE=%SCRIPT_DIR%.venv\Scripts\python.exe"
 ) else (
+  where py >nul 2>nul
+  if errorlevel 1 (
+    echo Python launcher 'py' not found. >> "%LOG%"
+    echo Python not found. Install Python 3.11+ and try again.
+    pause
+    endlocal & exit /b 9009
+  )
   set "PYEXE=py -3"
 )
 
-if defined DEFAULT_INPUT (
-  %PYEXE% -m hobo_consolidator.cli "%DEFAULT_INPUT%"
-) else (
-  %PYEXE% -m hobo_consolidator.cli %*
+if "%~1"=="" (
+  set "DEFAULT_INPUT=."
+  echo No input args; defaulting to "." >> "%LOG%"
 )
+
+echo Running: %PYEXE% -m hobo_consolidator.cli %* >> "%LOG%"
+
+if defined DEFAULT_INPUT (
+  %PYEXE% -m hobo_consolidator.cli "." >> "%LOG%" 2>&1
+) else (
+  %PYEXE% -m hobo_consolidator.cli %* >> "%LOG%" 2>&1
+)
+
 set "EXITCODE=%ERRORLEVEL%"
+echo ExitCode=%EXITCODE% >> "%LOG%"
 
 if not "%EXITCODE%"=="0" (
   echo.
   echo HOBO Consolidator failed with exit code %EXITCODE%.
-  echo Tip: ensure dependencies are installed from repo root:
+  echo See log: "%LOG%"
+  echo Common fix:
   echo   py -3 -m pip install -e .[test]
   pause
+) else (
+  echo.
+  echo Completed successfully.
+  echo Log written to: "%LOG%"
+  timeout /t 2 >nul
 )
 
 endlocal & exit /b %EXITCODE%
+'@ | Set-Content -Encoding ASCII .\hobo-consolidator.bat
+
+git add .\hobo-consolidator.bat
+git commit -m "Make BAT launcher robust and log crashes"
+git push origin main

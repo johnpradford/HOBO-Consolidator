@@ -1,0 +1,2 @@
+[console_scripts]
+hobo-consolidator = hobo_consolidator.cli:main

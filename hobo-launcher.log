@@ -1,0 +1,7 @@
+[22/05/2026 12:55:05.94] Launcher start 
+WorkingDir=C:\Users\JohnRadford\Claude tools\HOBO-Consolidator 
+Args= 
+No input args; defaulting to "." 
+Running: py -3 -m hobo_consolidator.cli  
+2026-05-22 12:55:06,784 ERROR No valid data produced
+ExitCode=2 
