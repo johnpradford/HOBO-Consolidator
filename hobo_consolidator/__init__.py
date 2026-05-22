@@ -1,0 +1,1 @@
+"""HOBO consolidator package."""
