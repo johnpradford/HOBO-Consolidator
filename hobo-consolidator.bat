@@ -1,4 +1,3 @@
-@'
 @echo off
 setlocal EnableExtensions
 
@@ -55,8 +54,3 @@ if not "%EXITCODE%"=="0" (
 )
 
 endlocal & exit /b %EXITCODE%
-'@ | Set-Content -Encoding ASCII .\hobo-consolidator.bat
-
-git add .\hobo-consolidator.bat
-git commit -m "Make BAT launcher robust and log crashes"
-git push origin main
