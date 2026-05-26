@@ -1,3 +1,17 @@
+site_regex: '(?P<site>[A-Za-z0-9]+)[_\-\s]*(?P<device>internal|external|int|ext|inside|outside|ambient|cave)?'
+device_aliases:
+  internal: [internal, int, inside, cave]
+  external: [external, ext, outside, ambient]
+timestamp_candidates: ["Date Time", "Timestamp", "Time"]
+timestamp_formats: []
+timezone_mode: assume_utc
+timezone_name: null
+conflict_policy: prefer_newest_file
+source_priority: []
+null_tokens: ["", "NA", "N/A", "null"]
+output_timestamp_format: "%Y-%m-%dT%H:%M:%S%z"
+site_normalization: {}
+provenance_enabled: true
 site_regex: '(?P<site>[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*)'
 timestamp_candidates: ['Date Time', 'Timestamp', 'Time']
 timestamp_formats: ['%Y-%m-%d %H:%M:%S', '%m/%d/%Y %H:%M:%S', '%Y-%m-%dT%H:%M:%S']
